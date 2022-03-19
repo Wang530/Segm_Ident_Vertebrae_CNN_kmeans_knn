@@ -3,16 +3,18 @@ import argparse
 import SimpleITK as sitk
 from skimage import measure
 import numpy as np
+import sys
+sys.path.append('/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn')
 from config.paths import base_dataset_dir
 
 
 def get_bbox(image_sitk):
-    image_np = sitk.GetArrayFromImage(image_sitk)
+    image_np = sitk.GetArrayFromImage(image_sitk)  #转换成ndarray
     image_np[image_np != 0] = 1
-    image_np = measure.label(image_np)
+    image_np = measure.label(image_np)   #输出联通区域的块数，对二值图像进行连通区域进行标记，它的返回值就是标记，并没有对二值图像进行改变
     print(np.unique(image_np))
-    reg_prop = measure.regionprops(image_np)
-    bb = reg_prop[0].bbox
+    reg_prop = measure.regionprops(image_np)  #对每个联通区域分别进行操作：提取出连通区域
+    bb = reg_prop[0].bbox   #bbox:边界外接框(min_row, min_col, max_row, max_col)
     return bb
 
 
@@ -85,7 +87,7 @@ def crop_image_folder(images_folder, labels_folder, images_folder_save, labels_f
         print("BBox = {}".format(bbox))
         zmin, ymin, xmin, zmax, ymax, xmax = bbox
         print("z = [{} - {}] | y = [{} - {}] | x = [{} - {}]".format(zmin, zmax, ymin, ymax, xmin, xmax))
-        modified_data = cut_image(msk_load, bbox)
+        modified_data = cut_image(msk_load, bbox)    #返回crop后的图像
         modified_data2 = cut_image(img_load, bbox)
         print("Before cut Image Size = {}".format(img_load.GetSize()))
         print("After  cut Image Size = {}".format(modified_data2.GetSize()))

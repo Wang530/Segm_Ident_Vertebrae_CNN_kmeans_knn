@@ -6,7 +6,7 @@ os.makedirs(logs_folder, exist_ok=True)
 current_path_abs = os.path.abspath('.')
 sys.path.append(current_path_abs)
 
-base_dataset_dir = 'F:\\Dataset\\Verse'
+base_dataset_dir = '/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn/DatasetLoad'
 train_images_folder = os.path.join(base_dataset_dir, "training")
 train_labels_folder = os.path.join(base_dataset_dir, "training_mask")
 

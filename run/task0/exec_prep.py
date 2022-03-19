@@ -9,4 +9,4 @@ subprocess.run(["python", "run/task0/crop_mask.py"])
 print("Preprocessing cropped data...")
 subprocess.run(["python", "run/task0/pre_processing.py"])
 
-print("Dataset preparation ended!")
+print("DatasetLoad preparation ended!")

@@ -2,7 +2,8 @@ import argparse
 import os
 import torch
 import torch.optim as optim
-
+import sys
+sys.path.append('/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn')
 from config.config_semseg import SemSegMRIConfig
 from models.vnet3d import VNet3D
 from config.paths import logs_folder
@@ -19,13 +20,13 @@ def run(config):
     ##########################
     # Check training set
     ##########################
-    check_train_set(config)
+    check_train_set(config)   # 检查训练的数据和数据的标签数量是否相等
 
     ##########################
     # Config
     ##########################
     print_config(config)
-    index = round(len(config.train_images) * 9/10)
+    index = round(len(config.train_images) * 9/10)   #round() 方法返回浮点数x的四舍五入值
     print("Train set size = {}".format(index))
     print("Val   set size = {}".format(len(config.train_images)-index))
     train_index = list(range(index))

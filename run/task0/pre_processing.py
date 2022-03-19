@@ -1,4 +1,6 @@
 import itk
+import sys
+sys.path.append('/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn')
 import os
 import numpy as np
 from config.paths import base_dataset_dir
