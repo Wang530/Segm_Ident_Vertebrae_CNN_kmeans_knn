@@ -26,10 +26,10 @@ def run(config):
     # Config
     ##########################
     print_config(config)
-    index = round(len(config.train_images) * 9/10)   #round() 方法返回浮点数x的四舍五入值
+    index = round(len(config.train_images) * 9/10)   #round() 方法返回浮点数x的四舍五入值   148
     print("Train set size = {}".format(index))
     print("Val   set size = {}".format(len(config.train_images)-index))
-    train_index = list(range(index))
+    train_index = list(range(index))   #训练集的索引
     val_index = list(range(index, len(config.train_images)))
 
     ##########################
@@ -47,7 +47,7 @@ def run(config):
     config_val.lr = 0.0001
     # config_val.lr = 0.005
     optimizer = optim.Adam(net.parameters(), lr=config_val.lr)
-    train_data_loader_3D = QueueDataLoaderTraining(config_val)
+    train_data_loader_3D = QueueDataLoaderTraining(config_val)  #返回的是patch形式
     net = train_model(net, optimizer, train_data_loader_3D,
                       config_val, device=cuda_dev, logs_folder=logs_folder)
 

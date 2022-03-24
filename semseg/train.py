@@ -24,13 +24,13 @@ def train_model(net, optimizer, train_data, config, device=None, logs_folder=Non
         # lower learning rate
         if epoch == config.low_lr_epoch:
             for param_group in optimizer.param_groups:
-                config.lr = config.lr / LEARNING_RATE_REDUCTION_FACTOR
+                config.lr = config.lr / LEARNING_RATE_REDUCTION_FACTOR   #减少学习速率的因素
                 param_group['lr'] = config.lr
 
         # switch to train mode
         net.train()
 
-        for i, data in tqdm(enumerate(train_data)):
+        for i, data in tqdm(enumerate(train_data)):  #进度条框
             # print(i)
             inputs, labels = data['t1']['data'], data['label']['data']
             if config.cuda:

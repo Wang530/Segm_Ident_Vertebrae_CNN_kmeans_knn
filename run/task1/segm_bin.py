@@ -1,5 +1,7 @@
 import argparse
 import os
+import sys
+sys.path.append('/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn')
 import torch
 import torchio
 from config.config_semseg import SemSegMRIConfig

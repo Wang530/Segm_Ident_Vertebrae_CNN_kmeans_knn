@@ -1,4 +1,6 @@
 import os
+import sys
+sys.path.append('/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn')
 import numpy as np
 import SimpleITK as sitk
 import json
@@ -9,8 +11,8 @@ from config.paths import base_dataset_dir
 
 
 def run():
-    path_to_ground_truth_masks = os.path.join(base_dataset_dir, 'validation_mask')
-    path_to_predicted_masks = os.path.join(base_dataset_dir, 'predTs')
+    path_to_ground_truth_masks = os.path.join(base_dataset_dir, 'predict_ground_truth')
+    path_to_predicted_masks = os.path.join(base_dataset_dir, 'predictMSK')
 
     gt_masks = os.listdir(path_to_ground_truth_masks)
     pr_masks = os.listdir(path_to_predicted_masks)
@@ -87,8 +89,8 @@ def run():
         'hds': hds
     }
 
-    with open("metrics.json") as f:
-        json.dump(dict_out, f)
+    with open("metrics.json") as f:  #
+        json.dump(dict_out, f)   #将Python对象转换为适当的json对象
 
 
 if __name__ == '__main__':

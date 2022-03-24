@@ -27,13 +27,13 @@ def create_subject_list(images, labels):
 
 def QueueDataLoaderTraining(config):
     print('Building TorchIO Training Set Loader...')
-    subject_list = create_subject_list(config.train_images, config.train_labels)
-    subjects_dataset = SubjectsDataset(subject_list, transform=train_transform)
-    patches_training_set = torchio.Queue(
+    subject_list = create_subject_list(config.train_images, config.train_labels)  #将图片和对应的标签保存在一个list,list中的元素是Subject
+    subjects_dataset = SubjectsDataset(subject_list, transform=train_transform) #将每个Subject进行transform处理
+    patches_training_set = torchio.Queue(  #对每个图像进行patch处理
         subjects_dataset=subjects_dataset,
         max_length=300,
         samples_per_volume=10,
-        sampler=torchio.sampler.UniformSampler(64),
+        sampler=torchio.sampler.UniformSampler(64), #对patch进行随机采样 64为patch的尺寸
         num_workers=config.num_workers,
         shuffle_subjects=True,
         shuffle_patches=True,

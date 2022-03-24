@@ -1,5 +1,7 @@
 import argparse
 import os
+import sys
+sys.path.append('/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn')
 import SimpleITK as sitk
 import json
 from scipy.spatial.distance import cdist
@@ -206,9 +208,12 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     run(
-        args.input_path,
-        args.gt_path,
-        args.output_path,
+    #     args.input_path,
+    #     args.gt_path,
+    #     args.output_path,
+        '/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn/DatasetLoad/predictMSK',
+        '/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn/DatasetLoad/predict_ground_truth',
+        '/home/m904/wdl/code/Segm_Ident_Vertebrae_CNN_kmeans_knn/DatasetLoad/predMulticlass',
         args.use_inertia_tensor,
         args.no_metrics
     )
